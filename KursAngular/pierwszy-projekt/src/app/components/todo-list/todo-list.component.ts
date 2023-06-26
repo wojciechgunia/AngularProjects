@@ -23,11 +23,6 @@ export class TodoListComponent
     this.todos.push({ name: todo, isComplete: false });
   }
 
-  changeTodoStatus(todo: Todo)
-  {
-    todo.isComplete = !todo.isComplete;
-  }
-
   clearErrorMessage()
   {
     this.errorMessage = "";
