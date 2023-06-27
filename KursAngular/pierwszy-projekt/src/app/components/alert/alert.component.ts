@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class AlertComponent {
 
   @Input() errorMessage!: string;
+  @Input() showButton: boolean=false;
   @Output() clearMessage = new EventEmitter<void>();
 
 

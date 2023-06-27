@@ -5,12 +5,15 @@ import { Component, Output, EventEmitter } from '@angular/core';
   templateUrl: './add-todo-form.component.html',
   styleUrls: ['./add-todo-form.component.scss']
 })
-export class AddTodoFormComponent {
+export class AddTodoFormComponent{
+
 
   @Output() newTodo = new EventEmitter<string>();
 
-  addTodo(value: string)
+  todoName='';
+
+  addTodo()
   {
-    this.newTodo.emit(value)
+    this.newTodo.emit(this.todoName);
   }
 }
