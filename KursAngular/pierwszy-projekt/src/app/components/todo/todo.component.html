@@ -3,4 +3,11 @@
   <span class="todo-item" [ngClass]="{'text-decoration-line-through':todo.isComplete}">{{i+1}}. {{todo.name}}</span>
   <button type="button" class="btn btn-danger btn-sm mx-2" (click)="deleteTodo()">Usuń</button>
 </li>
-<app-modal [title]="'Czy napewno chcesz usunąć zadanie o numerze '+(i+1)+'?'" (close)="close()" *ngIf="isDelete"></app-modal>
+
+
+<app-modal [title]="'Czy napewno chcesz usunąć zadanie o numerze '+(i+1)+'?'" (close)="close()" *ngIf="isDelete">
+  <div class="d-flex justify-content-end mx-4">
+    <button class="btn btn-danger btn-sm mx-2" (click)="deleteToDO()">Usuń</button>
+    <button class="btn btn-info btn-sm mx-2" (click)="close()">Anuluj</button>
+  </div>
+</app-modal>
