@@ -9,7 +9,7 @@ import { Todo } from 'src/app/shared/interfaces/todo.interface';
 })
 export class TodoListComponent
 {
-  todos: Todo[] = [];
+  todos: Todo[] = JSON.parse(localStorage.getItem('todos')!) ?? [];
   errorMessage = "";
 
   addTodo(todo: string): void
@@ -21,6 +21,7 @@ export class TodoListComponent
       return;
     }
     this.todos.push({ name: todo, isComplete: false });
+    localStorage.setItem('todos', JSON.stringify(this.todos))
   }
 
   clearErrorMessage()
@@ -31,5 +32,6 @@ export class TodoListComponent
   deleteTodo(i: number)
   {
     this.todos = this.todos.filter((todo: Todo, index: number) => index!=i);
+    localStorage.setItem('todos', JSON.stringify(this.todos))
   }
 }
