@@ -17,6 +17,7 @@ export class TodoComponent {
   @Input() todo!: Todo;
   @Input() i!: number;
   @Output() del = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
 
   // ngOnDestroy(): void
   // {
@@ -50,7 +51,7 @@ export class TodoComponent {
 
   changeTodoStatus(todo: Todo)
   {
-    todo.isComplete = !todo.isComplete;
+    this.change.emit();
   }
 
   deleteTodo()

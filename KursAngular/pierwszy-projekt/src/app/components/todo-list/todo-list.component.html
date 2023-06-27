@@ -7,7 +7,7 @@
 
   <ul class="list-group todo-list" *ngIf="todos.length > 0">
     <ng-container *ngFor="let todo of todos; index as i">
-      <app-todo [todo]="todo" [i]="i" (del)="deleteTodo(i)"></app-todo>
+      <app-todo [todo]="todo" [i]="i" (del)="deleteTodo(i)" (change)="changeTodoStatus(i)"></app-todo>
     </ng-container>
   </ul>
   <h5 *ngIf="todos.length==0">Aktualnie brak zadań!</h5>

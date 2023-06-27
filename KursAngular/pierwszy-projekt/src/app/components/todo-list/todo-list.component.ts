@@ -1,3 +1,4 @@
+import { TodoService } from './../../core/services/todo.service';
 import { Component } from '@angular/core';
 import { Todo } from 'src/app/shared/interfaces/todo.interface';
 
@@ -9,8 +10,9 @@ import { Todo } from 'src/app/shared/interfaces/todo.interface';
 })
 export class TodoListComponent
 {
-  todos: Todo[] = JSON.parse(localStorage.getItem('todos')!) ?? [];
   errorMessage = "";
+  todos: Todo[] = this.todoService.todos;
+  constructor(private todoService: TodoService){}
 
   addTodo(todo: string): void
   {
@@ -20,8 +22,8 @@ export class TodoListComponent
       this.errorMessage = "Zadanie powinno mieć co najmniej 4 znaki";
       return;
     }
-    this.todos.push({ name: todo, isComplete: false });
-    localStorage.setItem('todos', JSON.stringify(this.todos))
+    this.todoService.addTodo(todo);
+    this.todos = this.todoService.todos;
   }
 
   clearErrorMessage()
@@ -31,7 +33,13 @@ export class TodoListComponent
 
   deleteTodo(i: number)
   {
-    this.todos = this.todos.filter((todo: Todo, index: number) => index!=i);
-    localStorage.setItem('todos', JSON.stringify(this.todos))
+    this.todoService.deleteTodo(i);
+    this.todos = this.todoService.todos;
+  }
+
+  changeTodoStatus(i: number)
+  {
+    this.todoService.changeTodoStatus(i);
+    this.todos = this.todoService.todos;
   }
 }
