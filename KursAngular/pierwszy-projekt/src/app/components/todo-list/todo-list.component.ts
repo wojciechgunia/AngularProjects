@@ -1,5 +1,6 @@
 import { TodoService } from './../../core/services/todo.service';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Todo } from 'src/app/shared/interfaces/todo.interface';
 
 @Component
@@ -8,11 +9,21 @@ import { Todo } from 'src/app/shared/interfaces/todo.interface';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent
+export class TodoListComponent implements OnInit, OnDestroy
 {
   errorMessage = "";
   todos: Todo[] = this.todoService.todos;
   constructor(private todoService: TodoService){}
+  sub!: Subscription;
+
+  ngOnInit(): void
+  {
+    this.sub = this.todoService.todoChange.subscribe({next: value => this.todos=value});
+  }
+  ngOnDestroy(): void
+  {
+    this.sub.unsubscribe();
+  }
 
   addTodo(todo: string): void
   {
@@ -23,7 +34,7 @@ export class TodoListComponent
       return;
     }
     this.todoService.addTodo(todo);
-    this.todos = this.todoService.todos;
+    // this.todos = this.todoService.todos;
   }
 
   clearErrorMessage()
@@ -34,12 +45,12 @@ export class TodoListComponent
   deleteTodo(i: number)
   {
     this.todoService.deleteTodo(i);
-    this.todos = this.todoService.todos;
+    // this.todos = this.todoService.todos;
   }
 
   changeTodoStatus(i: number)
   {
     this.todoService.changeTodoStatus(i);
-    this.todos = this.todoService.todos;
+    // this.todos = this.todoService.todos;
   }
 }
