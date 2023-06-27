@@ -46,6 +46,7 @@ export class TodoComponent {
   // }
 
   isDelete: boolean=false;
+  //keyValueTest: {[key: string]: string | number} = { name: 'test', age: 12  }
 
   changeTodoStatus(todo: Todo)
   {
