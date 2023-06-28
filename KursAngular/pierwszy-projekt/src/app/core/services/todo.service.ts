@@ -7,13 +7,20 @@ import { Todo } from 'src/app/shared/interfaces/todo.interface';
 })
 export class TodoService
 {
-  private _todos: Todo[] = JSON.parse(localStorage.getItem('todos')!) ?? [];
+  private _todos: Todo[] = []
+  //private _todos: Todo[] = JSON.parse(localStorage.getItem('todos')!) ?? [];
   private _todoChange = new Subject<Todo[]>();
   constructor() { }
 
   public get todos()
   {
     return this._todos.slice();
+  }
+
+  public set todos(arrTodos: Todo[])
+  {
+    this._todos = [...arrTodos];
+    this.todoChange.next(this.todos)
   }
 
   public get todoChange()
@@ -31,32 +38,22 @@ export class TodoService
     return this.todos.length;
   }
 
-  addTodo(name: string): void
+  addTodo(todo: Todo): void
   {
-    this._todos.push({ name, isComplete: false });
-    this.saveToLocalStorage();
+    this._todos.push(todo);
     this._todoChange.next(this.todos);
-  }
-
-  saveToLocalStorage()
-  {
-    localStorage.setItem('todos', JSON.stringify(this.todos))
   }
 
   deleteTodo(i: number)
   {
-    this._todos = this.todos.filter((todo: Todo, index: number) => index!=i);
-    this.saveToLocalStorage()
+    this._todos = this.todos.filter((todo: Todo, id: number) => todo.id!=i);
     this._todoChange.next(this.todos);
   }
 
-  changeTodoStatus(index: number)
+  changeTodoStatus(todoChange: Todo)
   {
-    this._todos[index] = {
-      ...this.todos[index],
-      isComplete: !this.todos[index].isComplete
-    }
-    this.saveToLocalStorage()
-    this._todoChange.next(this.todos);
+    const index: number=this._todos.findIndex((todo: Todo, id: number) => todo.id==todoChange.id);
+    this._todos[index] = todoChange;
+    this._todoChange.next(this._todos);
   }
 }

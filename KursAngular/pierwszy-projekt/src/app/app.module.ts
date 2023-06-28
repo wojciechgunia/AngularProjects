@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { Page404Component } from './components/page404/page404.component';
 import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
+import { HttpClientModule } from '@angular/common/http'
 
 registerLocaleData(localePl);
 @NgModule({
@@ -39,7 +40,9 @@ registerLocaleData(localePl);
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule
+
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pl'}],
   bootstrap: [AppComponent]

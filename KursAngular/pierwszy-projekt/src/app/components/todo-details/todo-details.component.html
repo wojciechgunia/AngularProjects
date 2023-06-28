@@ -1,14 +1,15 @@
 <div class="mt-3">
   <p *ngIf="!todo">There is no such task!</p>
   <div *ngIf="todo">
+    <p>Todo Id: {{todo.id}}</p>
     <p>The content of the task: {{todo.name}}</p>
     <p>Is Complete: {{todo.isComplete?'yes':'no'}}</p>
 
     <p>Navigation:</p>
-    <div class="d-flex flex-row justify-content-end " style="width: 300px;">
-      <button *ngIf="id>0" class="btn btn-sm btn-info mx-1" (click)="navigateToPreviousTodo()">Previous Todo</button>
-      <button class="btn btn-sm btn-info mx-1" (click)="navigateToTodoList()">All Todos</button>
-      <button *ngIf="id<todoLenght-1" class="btn btn-sm btn-info mx-1" (click)="navigateToNetxTodo()">Next Todo</button>
+    <div class="d-flex flex-row justify-content-start " style="width: 360px;">
+      <div style="width: 120px;"><button *ngIf="id>0" class="btn btn-sm btn-info mx-1" style="width: 110px;" (click)="navigateToPreviousTodo()">Previous Todo</button></div>
+      <div style="width: 120px;"><button class="btn btn-sm btn-info mx-1" style="width: 110px;" (click)="navigateToTodoList()">All Todos</button></div>
+      <div style="width: 120px;"><button *ngIf="id<todoLenght-1" class="btn btn-sm btn-info mx-1" style="width: 110px;" (click)="navigateToNetxTodo()">Next Todo</button></div>
     </div>
 
   </div>

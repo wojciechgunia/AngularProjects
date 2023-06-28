@@ -17,7 +17,7 @@ export class TodoComponent {
 
   @Input() todo!: Todo;
   @Input() i!: number;
-  @Output() del = new EventEmitter<void>();
+  @Output() del = new EventEmitter<number>();
   @Output() change = new EventEmitter<void>();
 
   // ngOnDestroy(): void
@@ -48,7 +48,7 @@ export class TodoComponent {
   isDelete: boolean=false;
   //keyValueTest: {[key: string]: string | number} = { name: 'test', age: 12  }
 
-  changeTodoStatus(todo: Todo)
+  changeTodoStatus()
   {
     this.change.emit();
   }
@@ -70,7 +70,7 @@ export class TodoComponent {
 
   deleteToDO()
   {
-    this.del.emit();
+    this.del.emit(this.todo.id);
   }
 
   close()
