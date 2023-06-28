@@ -14,6 +14,10 @@ import { registerLocaleData } from '@angular/common';
 import { FirstLetterUppercasePipe } from './shared/pipes/first-letter-uppercase.pipe';
 import { FormsModule } from '@angular/forms';
 import { FirstLetterDirective } from './shared/directives/first-letter.directive';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './components/home/home.component';
+import { Page404Component } from './components/page404/page404.component';
+import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
 
 registerLocaleData(localePl);
 @NgModule({
@@ -27,11 +31,15 @@ registerLocaleData(localePl);
     TodoComponent,
     ModalComponent,
     FirstLetterUppercasePipe,
-    FirstLetterDirective
+    FirstLetterDirective,
+    HomeComponent,
+    Page404Component,
+    TodoDetailsComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pl'}],
   bootstrap: [AppComponent]
