@@ -14,6 +14,9 @@ import {
   Subscription,
 } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-clients-table',
@@ -29,6 +32,7 @@ export class ClientsTableComponent implements AfterViewInit, OnDestroy {
     'phone',
     'address',
     'postcode',
+    'buttons'
   ];
   dataSource!: MatTableDataSource<Client>;
 
@@ -46,7 +50,7 @@ export class ClientsTableComponent implements AfterViewInit, OnDestroy {
   pageIndex = 1;
   itemPerPage = 2;
 
-  constructor(private clientsService: ClientsService) {}
+  constructor(private clientsService: ClientsService, public dialog: MatDialog) {}
 
   ngAfterViewInit(): void {
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
@@ -111,6 +115,26 @@ export class ClientsTableComponent implements AfterViewInit, OnDestroy {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openDialog(client: Client): void {
+    this.dialog.open(DeleteDialogComponent, {
+      width: '350px',data: client
+    }).afterClosed().subscribe({
+      next: ()=>{
+        this.applyFilter('');
+      }
+    });
+  }
+
+  openDialogEdit(client: Client): void {
+    this.dialog.open(EditDialogComponent, {
+      width: '600px',height:'auto',data: client
+    }).afterClosed().subscribe({
+      next: ()=>{
+        this.applyFilter('');
+      }
+    });
   }
 
   ngOnDestroy(): void {

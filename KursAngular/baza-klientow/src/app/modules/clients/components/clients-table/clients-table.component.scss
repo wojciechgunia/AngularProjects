@@ -9,12 +9,17 @@ table {
 
 td,
 th {
-  width: 15%;
+  width: 13%;
 }
 
 td:first-child,
 th:first-child {
-  width: 10%;
+  width: 8%;
+}
+
+td:last-child,
+th:last-child {
+  width: 14%;
 }
 
 .table-container {

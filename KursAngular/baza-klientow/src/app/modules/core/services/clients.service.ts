@@ -30,7 +30,7 @@ export class ClientsService {
     }
 
     if (value) {
-      params = params.append('firstname_like', value);
+      params = params.append('surname_like', value);
     }
 
     return this.http
@@ -85,6 +85,30 @@ export class ClientsService {
   postClient(clientData: PostClient): Observable<Client> {
     return this.http
       .post<ClientResponse>(`${this.apiUrl}/clients`, clientData)
+      .pipe(
+        map(
+          (c: ClientResponse) =>
+            new Client(
+              c.id,
+              c.firstname,
+              c.surname,
+              c.email,
+              c.phone,
+              c.address,
+              c.postcode
+            )
+        )
+      );
+  }
+
+  delClient(id: number): Observable<Record<string, never>>
+  {
+    return this.http.delete<Record<string, never>>(`${this.apiUrl}/clients/${id}`);
+  }
+
+  putClient(clientData: PostClient, id: number): Observable<Client> {
+    return this.http
+      .put<ClientResponse>(`${this.apiUrl}/clients/${id}`, clientData)
       .pipe(
         map(
           (c: ClientResponse) =>
