@@ -11,6 +11,6 @@ import { EditDialogComponent } from './components/edit-dialog/edit-dialog.compon
 @NgModule({
   declarations: [ClientsComponent, ClientsTableComponent, ClientComponent, ClientFormComponent, DeleteDialogComponent, EditDialogComponent],
   imports: [ClientsRoutingModule, SharedModule],
-  exports: [ClientsComponent],
+  exports: [],
 })
 export class ClientsModule {}
