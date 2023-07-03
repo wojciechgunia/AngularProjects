@@ -34,7 +34,7 @@
       </mat-form-field>
     </div>
     <div>
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-label>Telefon</mat-label>
         <input
           matInput
@@ -45,7 +45,8 @@
         <mat-error *ngIf="controls.phone.invalid">{{
           getError("phone")
         }}</mat-error>
-      </mat-form-field>
+      </mat-form-field> -->
+      <app-phone-control formControlName="phone"></app-phone-control>
     </div>
     <div>
       <mat-form-field>
