@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './modules/core/core.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { FooterComponent } from './modules/core/components/footer/footer.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +14,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AppRoutingModule,
     CoreModule,
     AuthModule,
+    FooterComponent,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
