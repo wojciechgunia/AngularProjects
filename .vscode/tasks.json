@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "startdb",
+			"path": "KursAngular/baza-klientow",
+			"problemMatcher": [],
+			"label": "npm: startdb - KursAngular/baza-klientow",
+			"detail": "json-server --watch db.json"
+		}
+	]
+}
