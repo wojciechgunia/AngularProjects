@@ -24,5 +24,14 @@
 <ul>
 	<li><a href="https://github.com/wojciechgunia/AngularProjects/tree/main/KursAngular">KursAngular - contains content from the Angular - Od zera do Fullstack developera course
 </a><ul><li><a href="https://www.udemy.com/course/angular-i-java-spring-od-zera-do-fullstack-developera/" target="_blank">Link to the course page</a></li></ul></li>
+</ul>
+
+ ###
+
+<h4 align="left">other Angular repositories links:</h4>
+
+###
+
+<ul>
 	<li><a href="https://github.com/WebSafer/WebSafer">WebSafer - contains the content of a project whose goal was to create a website about cybersecurity </a></li>
 </ul>
