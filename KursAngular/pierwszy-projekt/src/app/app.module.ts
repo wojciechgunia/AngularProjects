@@ -18,7 +18,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { Page404Component } from './components/page404/page404.component';
 import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store'
+import { todoListReducer } from './components/store/todo-list.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { TodoListEffects } from './components/store/todo-list.effects';
 
 registerLocaleData(localePl);
 @NgModule({
@@ -41,7 +45,9 @@ registerLocaleData(localePl);
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({todos: todoListReducer}),
+    EffectsModule.forRoot([TodoListEffects])
 
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pl'}],

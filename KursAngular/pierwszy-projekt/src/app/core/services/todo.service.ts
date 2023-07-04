@@ -28,9 +28,9 @@ export class TodoService
     return this._todoChange;
   }
 
-  getTodo(index: number):Todo | undefined
+  getTodo(index: number):Todo[] | undefined
   {
-    return this.todos[index];
+    return this._todos.slice();
   }
 
   getTodoLenght():number

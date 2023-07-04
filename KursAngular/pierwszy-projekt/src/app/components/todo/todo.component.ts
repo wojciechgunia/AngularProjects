@@ -60,7 +60,7 @@ export class TodoComponent {
       // queryParams: {id: this.i,test: 'wartosc'}
       // state: {test: 'example'}
     }
-    this.router.navigate([this.i], navigationExtras);
+    this.router.navigate([this.todo.id], navigationExtras);
   }
 
   deleteTodo()
