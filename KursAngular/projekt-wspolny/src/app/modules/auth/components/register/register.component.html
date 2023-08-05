@@ -1,0 +1,74 @@
+<form [formGroup]="registerForm">
+  <div class="form-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        type="email"
+        placeholder="adam@example.com"
+        [formControl]="controls.email"
+      />
+      <mat-error *ngIf="controls.email.invalid">{{
+        getErrorMessage("email", controls.email)
+      }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Login</mat-label>
+      <input matInput [formControl]="controls.login" />
+      <mat-error *ngIf="controls.login.invalid">{{
+        getErrorMessage("login", controls.login)
+      }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-input">
+    <mat-form-field>
+      <mat-label>Hasło</mat-label>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        [formControl]="controls.password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+        type="button"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <mat-error *ngIf="controls.password.invalid">{{
+        getErrorMessage("password", controls.password)
+      }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-input">
+    <mat-form-field>
+      <mat-label>Powtórz hasło</mat-label>
+      <input matInput type="password" [formControl]="controls.repassword" />
+      <mat-error *ngIf="controls.repassword.invalid">{{
+        getErrorMessage("repassword", controls.repassword)
+      }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-input mt-3">
+    <div class="form-button">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="registerForm.invalid"
+      >
+        Zarejestruj się
+      </button>
+    </div>
+  </div>
+  <div class="form-input mt-4">
+    <p class="text-center w-100">
+      Masz już konto? <a routerLink="/logowanie">Zaloguj się</a>
+    </p>
+  </div>
+</form>
