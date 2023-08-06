@@ -20,28 +20,6 @@ export class RegisterComponent {
   }
 
   getErrorMessage(typ: string, control: FormControl): string {
-    if (typ == 'login') {
-      if (control.hasError('required')) {
-        return 'Login jest wymagany';
-      } else if (control.hasError('minlength')) {
-        return 'Login musi mieć co najmniej 3 znaki';
-      } else {
-        return 'Login może mieć co najwyżej 50 znaków';
-      }
-    } else if (typ == 'email') {
-      if (control.hasError('required')) {
-        return 'Email jest wymagany';
-      } else {
-        return 'Niepoprawny adres email';
-      }
-    } else {
-      if (control.hasError('required')) {
-        return 'Hasło jest wymagane';
-      } else if (control.hasError('minlength')) {
-        return 'Hasło musi mieć co najmniej 3 znaki';
-      } else {
-        return 'Hasło może mieć co najwyżej 50 znaków';
-      }
-    }
+    return this.formService.getErrorMessage(typ, control);
   }
 }
