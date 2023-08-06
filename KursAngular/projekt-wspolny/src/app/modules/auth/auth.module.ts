@@ -4,9 +4,20 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterLink } from '@angular/router';
+import { AccountActivationComponent } from './components/account-activation/account-activation.component';
+import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
+import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { ResetInfoComponent } from './components/reset-info/reset-info.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    AccountActivationComponent,
+    PasswordRecoveryComponent,
+    PasswordResetComponent,
+    ResetInfoComponent,
+  ],
   imports: [SharedModule, AuthRoutingModule, RouterLink],
   exports: [LoginComponent, RegisterComponent],
 })

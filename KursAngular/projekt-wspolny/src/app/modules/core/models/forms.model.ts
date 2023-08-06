@@ -13,3 +13,14 @@ export interface RegisterForm
   password: FormControl<string>;
   repassword: FormControl<string>;
 }
+
+export interface RecoveryForm
+{
+  email: FormControl<string>;
+}
+
+export interface ResetForm
+{
+  password: FormControl<string>;
+  repassword: FormControl<string>;
+}
