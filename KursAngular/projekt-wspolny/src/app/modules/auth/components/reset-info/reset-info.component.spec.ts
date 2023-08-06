@@ -8,7 +8,7 @@ describe('ResetInfoComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ResetInfoComponent]
+      declarations: [ResetInfoComponent],
     });
     fixture = TestBed.createComponent(ResetInfoComponent);
     component = fixture.componentInstance;
