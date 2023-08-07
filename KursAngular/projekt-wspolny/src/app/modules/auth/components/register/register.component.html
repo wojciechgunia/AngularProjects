@@ -1,4 +1,4 @@
-<form [formGroup]="registerForm">
+<form [formGroup]="registerForm" (ngSubmit)="onRegister()">
   <div class="form-input">
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
@@ -70,5 +70,27 @@
     <p class="text-center w-100">
       Masz już konto? <a routerLink="/logowanie">Zaloguj się</a>
     </p>
+  </div>
+  <div
+    class="alert alert-warning alert-dismissible fade show mt-2"
+    role="'alert"
+    *ngIf="error"
+  >
+    {{ error }}
+    <button
+      type="button"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+      (click)="error = null"
+    >
+      Action
+    </button>
+  </div>
+  <div
+    class="alert alert-warning alert-dismissible fade show mt-2"
+    role="'alert"
+    *ngIf="errorMsg$ | async as errorm"
+  >
+    {{ errorm }}
   </div>
 </form>

@@ -26,7 +26,7 @@ export const register = createAction(
 );
 
 export const registerSuccess = createAction(
-  REGISTER_SUCCESS_TYPE, props<{ user: IUser }>()
+  REGISTER_SUCCESS_TYPE
 );
 
 export const registerFailure = createAction(

@@ -1,3 +1,4 @@
+/* eslint-disable @ngrx/on-function-explicit-return-type */
 import { Action, createReducer, on } from "@ngrx/store";
 import { User } from "../../core/models/auth.model";
 import * as AuthActions from "./auth.actions";
@@ -22,7 +23,11 @@ const _authreducer = createReducer(initialState,
   on(AuthActions.loginSuccess, (state, action)=>({
     ...state,
     loading: false,
-    user: action.user,
+    user: new User(
+      action.user.login,
+      action.user.email,
+      action.user.role
+    ),
     error: null,
   })),
   on(AuthActions.loginFailure, (state, action)=>({

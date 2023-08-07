@@ -1,19 +1,29 @@
 import { FormGroup } from '@angular/forms';
 import { LoginForm } from './../../../core/models/forms.model';
 import { FormService } from './../../../core/services/form.service';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import * as AuthActions from '../../store/auth.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducer';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   hide = true;
 
   loginForm: FormGroup<LoginForm> = this.formService.initLoginForm();
 
-  constructor(private formService: FormService) {}
+  constructor(
+    private formService: FormService,
+    private store: Store<AppState>,
+  ) {}
+
+  ngOnDestroy(): void {
+    this.store.dispatch(AuthActions.clearError());
+  }
 
   get controls() {
     return this.loginForm.controls;
@@ -25,5 +35,11 @@ export class LoginComponent {
     } else {
       return 'Niepoprawne hasło';
     }
+  }
+
+  onLogin() {
+    this.store.dispatch(
+      AuthActions.login({ loginData: this.loginForm.getRawValue() }),
+    );
   }
 }
