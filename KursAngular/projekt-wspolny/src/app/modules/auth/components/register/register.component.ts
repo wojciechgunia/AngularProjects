@@ -15,7 +15,7 @@ import { selectAuthError } from '../../store/auth.selectors';
 })
 export class RegisterComponent implements OnDestroy {
   hide = true;
-  error = null;
+  error = '';
 
   errorMsg$: Observable<string | null> = this.store.select(selectAuthError);
 
@@ -42,10 +42,13 @@ export class RegisterComponent implements OnDestroy {
     const { email, login, password, repassword } =
       this.registerForm.getRawValue();
 
-    if (password == repassword) {
-      this.store.dispatch(
-        AuthActions.register({ registerData: { email, login, password } }),
-      );
+    if (password !== repassword) {
+      this.error = 'Hasła nie mogą być różne.';
+      return;
     }
+
+    this.store.dispatch(
+      AuthActions.register({ registerData: { email, login, password } }),
+    );
   }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @ngrx/prefer-effect-callback-in-block-statement */
-import { AuthService } from './../../core/services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
@@ -16,7 +16,7 @@ export class AuthEffects
       map(
         (user) => AuthActions.loginSuccess({user: {...user}})
         ),
-      catchError(err =>
+      catchError((err) =>
         of(AuthActions.loginFailure({error: 'Wystąpił błąd'}))
         ));
   })));
@@ -28,11 +28,11 @@ export class AuthEffects
       map(
         (user) => {
           this.router.navigate(['/logowanie']);
-          this.notifierService.notify('success','Rejestracja zakończona sukcesem! <br>Aktywuj konto za pomocą adresu e-mail.')
+          this.notifierService.notify('success','Rejestracja zakończona sukcesem! <br>Aktywuj konto za pomocą adresu e-mail.');
           return AuthActions.registerSuccess();
         }
       ),
-      catchError(err =>
+      catchError((err) =>
         of(AuthActions.registerFailure({error: 'Wystąpił błąd'}))
       ));
   })));
