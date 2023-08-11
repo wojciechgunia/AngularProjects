@@ -28,7 +28,7 @@ export class AuthEffects
       map(
         (user) => {
           this.router.navigate(['/logowanie']);
-          this.notifierService.notify('success','Rejestracja zakończona sukcesem! <br>Aktywuj konto za pomocą adresu e-mail.');
+          this.notifierService.notify('success','Rejestracja zakończona sukcesem!\nAktywuj konto za pomocą adresu e-mail.');
           return AuthActions.registerSuccess();
         }
       ),
