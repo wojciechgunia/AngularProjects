@@ -32,9 +32,9 @@ export class AuthEffects
           return AuthActions.registerSuccess();
         }
       ),
-      catchError((err) =>
-        of(AuthActions.registerFailure({error: 'Wystąpił błąd'}))
-      ));
+      catchError((err) => {
+       return of(AuthActions.registerFailure({error: err}))
+      }));
   })));
 
   constructor(private actions$: Actions, private authService:AuthService, private router: Router, private notifierService: NotifierService){}

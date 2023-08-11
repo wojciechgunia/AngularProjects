@@ -6,7 +6,7 @@ import * as AuthActions from '../../store/auth.actions';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectAuthError } from '../../store/auth.selectors';
+import { selectAuthError, selectAuthLoading } from '../../store/auth.selectors';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +16,8 @@ import { selectAuthError } from '../../store/auth.selectors';
 export class RegisterComponent implements OnDestroy {
   hide = true;
   error = '';
+
+  loading$: Observable<boolean> = this.store.select(selectAuthLoading);
 
   errorMsg$: Observable<string | null> = this.store.select(selectAuthError);
 
