@@ -2,7 +2,7 @@
 import { AuthService } from '../../core/services/auth.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { EMPTY, catchError, map, of, switchMap } from 'rxjs';
 import * as AuthActions from "./auth.actions";
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
@@ -14,12 +14,46 @@ export class AuthEffects
   switchMap((action) => {
     return this.authService.login(action.loginData).pipe(
       map(
-        (user) => AuthActions.loginSuccess({user: {...user}})
+        (user) => {
+          this.router.navigate(['/']);
+          this.notifierService.notify('success',`Witaj ${user.login}`);
+          return AuthActions.loginSuccess({user: {...user}})
+        }
         ),
-      catchError((err) =>
-        of(AuthActions.loginFailure({error: 'Wystąpił błąd'}))
-        ));
+      catchError((err) =>{
+        return of(AuthActions.loginFailure({error: err}))
+        }));
   })));
+
+  logout$ = createEffect(()=>
+  this.actions$.pipe(ofType(AuthActions.logout),
+  switchMap(() => {
+    return this.authService.logout().pipe(
+      map(
+        () => {
+          this.router.navigate(['/logowanie']);
+          this.notifierService.notify('success',`Wylogowano się`);
+          return AuthActions.logoutSuccess()
+        }
+        ),
+      catchError((err) =>{
+        this.notifierService.notify('warning', err)
+        return of(AuthActions.logoutFailure())
+        }));
+  })));
+
+  autoLogin$ = createEffect(()=>
+  this.actions$.pipe(ofType(AuthActions.autoLogin),
+  switchMap(() => {
+    return this.authService.autoLogin().pipe(
+      map(
+        (user) => {
+          return AuthActions.autoLoginSuccess({user: {...user}})
+        }
+        ),
+      catchError(() => of(AuthActions.autoLoginFailure())),
+      );
+  })))
 
   register$ = createEffect(()=>
   this.actions$.pipe(ofType(AuthActions.register),

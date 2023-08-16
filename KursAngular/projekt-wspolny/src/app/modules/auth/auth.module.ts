@@ -7,7 +7,6 @@ import { RouterLink } from '@angular/router';
 import { AccountActivationComponent } from './components/account-activation/account-activation.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
-import { ResetInfoComponent } from './components/reset-info/reset-info.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,6 @@ import { ResetInfoComponent } from './components/reset-info/reset-info.component
     AccountActivationComponent,
     PasswordRecoveryComponent,
     PasswordResetComponent,
-    ResetInfoComponent,
   ],
   imports: [SharedModule, AuthRoutingModule, RouterLink],
   exports: [LoginComponent, RegisterComponent],

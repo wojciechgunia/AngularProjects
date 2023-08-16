@@ -118,7 +118,7 @@ export class FormService {
       if (control.hasError('required')) {
         return 'Hasło jest wymagane';
       } else if (control.hasError('minlength')) {
-        return 'Hasło musi mieć co najmniej 3 znaki';
+        return 'Hasło musi mieć co najmniej 5 znaków';
       } else if (control.hasError('passwordNotEquals')) {
         return 'Hasła nie są takie same';
       } else {

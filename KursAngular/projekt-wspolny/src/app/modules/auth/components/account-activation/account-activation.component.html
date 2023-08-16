@@ -1,5 +1,13 @@
 <div>
-  <p>Konto zostało aktywowane</p>
+  <p *ngIf="!errorMsg">Trwa aktywacja konta! Proszę czekać</p>
+
+  <div
+    class="alert alert-warning alert-dismissible fade show mt-2"
+    role="'alert"
+    *ngIf="errorMsg"
+  >
+    {{ errorMsg }}
+  </div>
 
   <span
     ><button

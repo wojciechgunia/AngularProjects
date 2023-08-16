@@ -5,15 +5,30 @@ import { RegisterComponent } from './components/register/register.component';
 import { AccountActivationComponent } from './components/account-activation/account-activation.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
-import { ResetInfoComponent } from './components/reset-info/reset-info.component';
+import { UnauthGuard } from '../core/guards/unauth.guard';
 
 const routes: Routes = [
-  { path: 'logowanie', component: LoginComponent },
-  { path: 'rejestracja', component: RegisterComponent },
-  { path: 'aktywuj/:uid', component: AccountActivationComponent },
-  { path: 'odzyskaj-haslo', component: PasswordRecoveryComponent },
-  { path: 'odzyskaj-haslo/:uid', component: PasswordResetComponent },
-  { path: 'odzyskaj-haslo-info', component: ResetInfoComponent },
+  { path: 'logowanie', component: LoginComponent, canActivate: [UnauthGuard] },
+  {
+    path: 'rejestracja',
+    component: RegisterComponent,
+    canActivate: [UnauthGuard],
+  },
+  {
+    path: 'aktywuj/:uid',
+    component: AccountActivationComponent,
+    canActivate: [UnauthGuard],
+  },
+  {
+    path: 'odzyskaj-haslo',
+    component: PasswordRecoveryComponent,
+    canActivate: [UnauthGuard],
+  },
+  {
+    path: 'odzyskaj-haslo/:uid',
+    component: PasswordResetComponent,
+    canActivate: [UnauthGuard],
+  },
 ];
 
 @NgModule({

@@ -35,6 +35,11 @@ export interface AuthResponse {
   code: string;
 }
 
+export interface LoggedInResponse extends Omit<AuthResponse,'message'>
+{
+  access: boolean;
+}
+
 export interface RecoveryPasswordData {
   email: string;
 }

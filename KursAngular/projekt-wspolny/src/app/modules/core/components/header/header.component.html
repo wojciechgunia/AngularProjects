@@ -25,26 +25,35 @@
             Strona główna
           </a>
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            aria-current="page"
-            routerLinkActive="active"
-            [routerLink]="'logowanie'"
-          >
-            Logowanie
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            aria-current="page"
-            routerLinkActive="active"
-            [routerLink]="'rejestracja'"
-          >
-            Rejestracja
-          </a>
-        </li>
+        <ng-template #notUser>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              aria-current="page"
+              routerLinkActive="active"
+              [routerLink]="'logowanie'"
+            >
+              Logowanie
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              aria-current="page"
+              routerLinkActive="active"
+              [routerLink]="'rejestracja'"
+            >
+              Rejestracja
+            </a>
+          </li>
+        </ng-template>
+        <ng-container *ngIf="user$ | async; else notUser">
+          <li class="nav-item">
+            <button mat-raised-button color="primary" (click)="logout()">
+              Wyloguj się
+            </button>
+          </li>
+        </ng-container>
       </ul>
     </div>
   </div>
