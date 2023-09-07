@@ -5,6 +5,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorHandlingInterceptor } from './interceptors/error-handling.interceptor';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginatorCustomIntl } from './material/mat-paginator-custom-intl';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -15,6 +17,10 @@ import { ErrorHandlingInterceptor } from './interceptors/error-handling.intercep
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlingInterceptor,
       multi: true,
+    },
+    {
+      provide: MatPaginatorIntl,
+      useClass: MatPaginatorCustomIntl,
     },
   ],
 })
