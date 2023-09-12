@@ -6,8 +6,10 @@
     ></app-product>
   </div>
   <mat-paginator
+    *ngIf="!error"
     [pageSizeOptions]="[1, 5, 10, 15]"
     [length]="totalCount"
     showFirstLastButtons
   ></mat-paginator>
+  <app-alert [message]="error" [alertType]="'warning'"></app-alert>
 </section>
