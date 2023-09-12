@@ -1,10 +1,14 @@
-export interface Product
+export interface PrimitiveProduct
 {
-  uid: string;
-  shortId: number;
-  active: boolean;
   name: string;
-  category: string;
   price: number;
+  createAt: string;
   imageUrl: string;
+  mainDesc: string;
+}
+
+export interface GetProductResponse
+{
+  products: PrimitiveProduct[];
+  totalCount: number;
 }
