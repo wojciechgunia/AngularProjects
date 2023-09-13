@@ -15,11 +15,16 @@ export class ProductsService {
   getProducts(
     pageIndex = 1,
     itemsPerPage = 10,
+    name: string | null = null,
   ): Observable<GetProductResponse> {
     // eslint-disable-next-line prefer-const
     let params = new HttpParams()
       .append('_page', pageIndex)
       .append('_limit', itemsPerPage);
+
+    if (name) {
+      params = params.append('name_like', name);
+    }
 
     return this.http
       .get<PrimitiveProduct[]>(`${this.apiUrl}`, {
