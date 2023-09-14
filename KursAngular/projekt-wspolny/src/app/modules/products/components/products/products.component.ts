@@ -88,12 +88,16 @@ export class ProductsComponent implements AfterViewInit, OnDestroy, OnInit {
           const orderProduct = queryMap.get('sortuj')
             ? queryMap.get('sortuj')
             : null;
+          const category = queryMap.get('kategoria')
+            ? queryMap.get('kategoria')
+            : null;
           return this.productService.getProducts(
             pageIndex,
             limit,
             productName,
             sortProduct,
             orderProduct,
+            category,
           );
         }),
         map((response) => {
@@ -132,10 +136,13 @@ export class ProductsComponent implements AfterViewInit, OnDestroy, OnInit {
       limit: this.paginator.pageSize,
     };
 
+    const category = this.route.snapshot.queryParamMap.get('kategoria');
+    if (category) {
+      queryParams['kategoria'] = category;
+    }
+
     if (this.searchControl.value) {
-      queryParams['nazwa'] = encodeURIComponent(
-        this.searchControl.value as string,
-      );
+      queryParams['nazwa'] = this.searchControl.value;
     }
 
     if (this.sortControl.value) {

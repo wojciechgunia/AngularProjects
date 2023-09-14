@@ -18,6 +18,7 @@ export class ProductsService {
     name: string | null = null,
     sortProduct: string | null = null,
     orderProduct: string | null = null,
+    category: string | null = null,
   ): Observable<GetProductResponse> {
     // eslint-disable-next-line prefer-const
     let params = new HttpParams()
@@ -34,6 +35,10 @@ export class ProductsService {
 
     if (orderProduct) {
       params = params.append('_order', orderProduct);
+    }
+
+    if (category) {
+      params = params.append('_category', category);
     }
 
     return this.http
