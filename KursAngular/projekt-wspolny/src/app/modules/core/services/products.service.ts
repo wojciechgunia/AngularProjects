@@ -16,6 +16,8 @@ export class ProductsService {
     pageIndex = 1,
     itemsPerPage = 10,
     name: string | null = null,
+    sortProduct: string | null = null,
+    orderProduct: string | null = null,
   ): Observable<GetProductResponse> {
     // eslint-disable-next-line prefer-const
     let params = new HttpParams()
@@ -24,6 +26,14 @@ export class ProductsService {
 
     if (name) {
       params = params.append('name_like', name);
+    }
+
+    if (sortProduct) {
+      params = params.append('_sort', sortProduct);
+    }
+
+    if (orderProduct) {
+      params = params.append('_order', orderProduct);
     }
 
     return this.http
