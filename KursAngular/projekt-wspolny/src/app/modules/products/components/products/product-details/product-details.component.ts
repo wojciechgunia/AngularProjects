@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Product } from 'src/app/modules/core/models/product.model';
 import { ProductsService } from 'src/app/modules/core/services/products.service';
@@ -15,7 +15,8 @@ export class ProductDetailsComponent implements OnInit {
     private productsService: ProductsService,
   ) {}
 
-  product?: Product;
+  product: Product | null = null;
+  parameters: { [key: string]: string } | null = null;
 
   ngOnInit(): void {
     this.route.paramMap
@@ -27,7 +28,12 @@ export class ProductDetailsComponent implements OnInit {
       )
       .subscribe({
         next: (product) => {
-          this.product = product;
+          this.product = { ...product };
+          try {
+            this.parameters = JSON.parse(product.parameters);
+          } catch (e) {
+            this.parameters = null;
+          }
         },
       });
   }

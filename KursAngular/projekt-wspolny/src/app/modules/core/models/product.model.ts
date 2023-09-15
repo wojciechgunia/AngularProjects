@@ -13,9 +13,13 @@ export interface GetProductResponse
   totalCount: number;
 }
 
-export interface Product extends Omit<PrimitiveProduct, "imageUrl">
+export interface Product
 {
     uid: string;
+    name: string;
+    price: number;
+    createAt: string;
+    mainDesc: string;
     activate: boolean;
     descHtml: string;
     imageUrls: string[];

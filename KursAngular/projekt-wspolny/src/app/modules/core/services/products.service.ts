@@ -19,7 +19,7 @@ export class ProductsService {
   getProduct(name: string, date: string): Observable<Product> {
     const params = new HttpParams()
       .append('name_like', name)
-      .append('date', date);
+      .append('data', date);
 
     return this.http.get<Product>(`${this.apiUrl}`, {
       params,
