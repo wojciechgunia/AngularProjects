@@ -1,4 +1,5 @@
 import {
+  CategoryForm,
   LoginForm,
   RecoveryForm,
   RegisterForm,
@@ -99,6 +100,19 @@ export class FormService {
     });
   }
 
+  initAddCategoryForm(): FormGroup<CategoryForm> {
+    return new FormGroup({
+      name: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50),
+        ],
+        nonNullable: true,
+      }),
+    });
+  }
+
   getErrorMessage(typ: string, control: FormControl): string {
     if (typ == 'login') {
       if (control.hasError('required')) {
@@ -113,6 +127,14 @@ export class FormService {
         return 'Email jest wymagany';
       } else {
         return 'Niepoprawny adres email';
+      }
+    } else if (typ == 'name') {
+      if (control.hasError('required')) {
+        return 'Nazwa jest wymagana';
+      } else if (control.hasError('minlength')) {
+        return 'Nazwa musi mieć co najmniej 3 znaki';
+      } else {
+        return 'Nazwa może mieć co najwyżej 50 znaków';
       }
     } else {
       if (control.hasError('required')) {

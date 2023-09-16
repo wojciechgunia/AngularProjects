@@ -24,3 +24,8 @@ export interface ResetForm
   password: FormControl<string>;
   repassword: FormControl<string>;
 }
+
+export interface CategoryForm
+{
+  name: FormControl<string>;
+}
