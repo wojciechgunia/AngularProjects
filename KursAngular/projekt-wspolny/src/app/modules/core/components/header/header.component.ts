@@ -38,6 +38,13 @@ export class HeaderComponent implements OnInit {
     this.store.dispatch(AuthActions.logout());
   }
 
+  isAdmin(user: User) {
+    if (user.role === 'ADMIN') {
+      return true;
+    }
+    return false;
+  }
+
   navigateToCategory(category: Category) {
     const queryParams: { [key: string]: string | number } = {
       kategoria: category.shortId,
