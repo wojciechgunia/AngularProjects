@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -17,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatPaginatorModule,
     MatAutocompleteModule,
     MatSelectModule,
+    MatExpansionModule,
   ],
 })
 export class MaterialModule {}
