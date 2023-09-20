@@ -12,6 +12,7 @@ export class AddProductFormComponent {
   fileName: string | null = null;
 
   imageUrls: Image[] = [];
+  error: string | null = null;
 
   constructor(private imageService: ImageService) {}
 
@@ -23,6 +24,7 @@ export class AddProductFormComponent {
   }
 
   uploadFile() {
+    this.error = null;
     if (this.selectedFile) {
       const formData = new FormData();
 
@@ -33,9 +35,13 @@ export class AddProductFormComponent {
           this.imageUrls = [...this.imageUrls, { ...resp }];
         },
         error: (err) => {
-          console.log(err);
+          this.error = err;
         },
       });
     }
+  }
+
+  setActiveImages(imageArray: Image[]) {
+    this.imageUrls = [...imageArray];
   }
 }

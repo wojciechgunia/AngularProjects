@@ -8,6 +8,7 @@ import { EditProductsComponent } from './components/administrator/edit-products/
 import { SharedModule } from '../shared/shared.module';
 import { AddProductFormComponent } from './components/administrator/edit-products/add-product-form/add-product-form.component';
 import { DeleteProductFormComponent } from './components/administrator/edit-products/delete-product-form/delete-product-form.component';
+import { UploadedImagesComponent } from './components/administrator/edit-products/add-product-form/uploaded-images/uploaded-images.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { DeleteProductFormComponent } from './components/administrator/edit-prod
     EditProductsComponent,
     AddProductFormComponent,
     DeleteProductFormComponent,
+    UploadedImagesComponent,
   ],
   imports: [SharedModule, AdministrationRoutingModule],
 })

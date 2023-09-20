@@ -22,4 +22,14 @@
     #fileInput
     (change)="onFileSelected($event)"
   />
+  <app-uploaded-images
+    *ngIf="imageUrls.length > 0"
+    [imageUrls]="imageUrls"
+    (deleteImageUrl)="setActiveImages($event)"
+  ></app-uploaded-images>
+  <app-alert
+    *ngIf="error"
+    [message]="error"
+    [alertType]="'warning'"
+  ></app-alert>
 </section>
