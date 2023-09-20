@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 export interface LoginForm
 {
@@ -28,4 +28,17 @@ export interface ResetForm
 export interface CategoryForm
 {
   name: FormControl<string>;
+}
+
+export interface AddProduct
+{
+  name: FormControl<string>;
+  mainDesc: FormControl<string>;
+  descHtml: FormControl<string>;
+  price: FormControl<string>;
+  category: FormControl<string>;
+  parameters: FormArray<FormGroup<{
+    key: FormControl<string>;
+    value: FormControl<string>;
+  }>>;
 }

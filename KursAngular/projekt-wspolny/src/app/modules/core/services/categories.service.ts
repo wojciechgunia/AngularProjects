@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -12,8 +12,14 @@ export class CategoriesService {
 
   constructor(private http: HttpClient) {}
 
+  categories = new BehaviorSubject<Category[]>([]);
+
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.apiUrl}`);
+    return this.http.get<Category[]>(`${this.apiUrl}`).pipe(
+      tap((categories) => {
+        this.categories.next(categories);
+      }),
+    );
   }
 
   addCategory(

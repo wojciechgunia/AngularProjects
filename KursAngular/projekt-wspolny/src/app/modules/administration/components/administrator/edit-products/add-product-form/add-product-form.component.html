@@ -32,4 +32,66 @@
     [message]="error"
     [alertType]="'warning'"
   ></app-alert>
+  <hr class="mt-5" />
+  <form [formGroup]="addProductForm" (ngSubmit)="addProduct()" class="mt-5">
+    <div class="form-container">
+      <div class="form-input2">
+        <mat-form-field appearance="fill">
+          <mat-label>Name produktu</mat-label>
+          <input matInput [formControl]="controls.name" />
+          <mat-error *ngIf="controls.name.invalid">{{
+            getErrorMessage('productform', controls.name)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-input2">
+        <mat-form-field appearance="fill">
+          <mat-label>Krótki opis</mat-label>
+          <textarea matInput [formControl]="controls.mainDesc"></textarea>
+          <mat-error *ngIf="controls.mainDesc.invalid">{{
+            getErrorMessage('productform', controls.mainDesc)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <angular-editor
+        [formControl]="controls.descHtml"
+        [config]="config"
+        style="width: 100%; padding: 10px"
+      ></angular-editor>
+
+      <div class="form-input">
+        <mat-form-field appearance="fill">
+          <mat-label>Cena</mat-label>
+          <input
+            matInput
+            [formControl]="controls.price"
+            type="number"
+            style="width: calc(100% - 18px)"
+          />zł
+          <mat-error *ngIf="controls.price.invalid">{{
+            getErrorMessage('productform', controls.price)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-input">
+        <mat-form-field appearance="fill">
+          <mat-label>Kategoria</mat-label>
+          <mat-select [formControl]="controls.category">
+            <mat-option value="">-</mat-option>
+            <mat-option
+              *ngFor="let category of categories | async"
+              [value]="category.shortId"
+              >{{ category.name }}</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="controls.category.invalid">{{
+            getErrorMessage('productform', controls.category)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
 </section>

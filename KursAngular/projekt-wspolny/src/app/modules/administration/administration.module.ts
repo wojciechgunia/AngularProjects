@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdministratorComponent } from './components/administrator/administrator.component';
@@ -19,6 +19,6 @@ import { UploadedImagesComponent } from './components/administrator/edit-product
     DeleteProductFormComponent,
     UploadedImagesComponent,
   ],
-  imports: [SharedModule, AdministrationRoutingModule],
+  imports: [SharedModule, AdministrationRoutingModule, AngularEditorModule],
 })
 export class AdministrationModule {}

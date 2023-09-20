@@ -1,4 +1,5 @@
 import {
+  AddProduct,
   CategoryForm,
   LoginForm,
   RecoveryForm,
@@ -6,7 +7,7 @@ import {
   ResetForm,
 } from './../models/forms.model';
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { equivalentValidator } from '../../shared/vaidators/equivalent.validator';
 
 @Injectable({
@@ -113,6 +114,71 @@ export class FormService {
     });
   }
 
+  initAddProductForm(): FormGroup<AddProduct> {
+    return new FormGroup({
+      name: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ],
+        nonNullable: true,
+      }),
+      mainDesc: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ],
+        nonNullable: true,
+      }),
+      descHtml: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ],
+        nonNullable: true,
+      }),
+      price: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ],
+        nonNullable: true,
+      }),
+      category: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ],
+        nonNullable: true,
+      }),
+      parameters: new FormArray([
+        new FormGroup({
+          key: new FormControl('', {
+            validators: [
+              Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(100),
+            ],
+            nonNullable: true,
+          }),
+          value: new FormControl('', {
+            validators: [
+              Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(100),
+            ],
+            nonNullable: true,
+          }),
+        }),
+      ]),
+    });
+  }
+
   getErrorMessage(typ: string, control: FormControl): string {
     if (typ == 'login') {
       if (control.hasError('required')) {
@@ -135,6 +201,14 @@ export class FormService {
         return 'Nazwa musi mieć co najmniej 3 znaki';
       } else {
         return 'Nazwa może mieć co najwyżej 50 znaków';
+      }
+    } else if (typ == 'productform') {
+      if (control.hasError('required')) {
+        return 'To pole jest wymagane';
+      } else if (control.hasError('minlength')) {
+        return 'To pole musi mieć co najmniej 3 znaki';
+      } else {
+        return 'To pole może mieć co najwyżej 100 znaków';
       }
     } else {
       if (control.hasError('required')) {
