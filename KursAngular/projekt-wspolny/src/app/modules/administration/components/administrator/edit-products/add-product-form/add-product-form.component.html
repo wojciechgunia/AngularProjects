@@ -37,7 +37,7 @@
     <div class="form-container">
       <div class="form-input2">
         <mat-form-field appearance="fill">
-          <mat-label>Name produktu</mat-label>
+          <mat-label>Nazwa produktu</mat-label>
           <input matInput [formControl]="controls.name" />
           <mat-error *ngIf="controls.name.invalid">{{
             getErrorMessage('productform', controls.name)
@@ -92,6 +92,86 @@
           }}</mat-error>
         </mat-form-field>
       </div>
+      <hr class="mt-5 w-100" />
+      <div
+        [formArrayName]="'parameters'"
+        *ngIf="parameters.controls.length > 0"
+        style="width: 90% mt-5"
+      >
+        <p>Parametry:</p>
+        <div
+          *ngFor="let param of parameters.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="form-control-wrapper">
+            <div class="form-array-input">
+              <mat-form-field appearance="fill">
+                <mat-label>Nazwa parametru</mat-label>
+                <input matInput [formControl]="parameters.at(i).controls.key" />
+                <mat-error *ngIf="parameters.at(i).controls.key.invalid">{{
+                  getErrorMessage('productform', parameters.at(i).controls.key)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="form-array-input">
+              <mat-form-field appearance="fill">
+                <mat-label>Wartość</mat-label>
+                <input
+                  matInput
+                  [formControl]="parameters.at(i).controls.value"
+                />
+                <mat-error *ngIf="parameters.at(i).controls.value.invalid">{{
+                  getErrorMessage(
+                    'productform',
+                    parameters.at(i).controls.value
+                  )
+                }}</mat-error>
+                <mat-icon
+                  matSuffix
+                  matTooltip="Usuń parametr"
+                  (click)="deleteParameter(i)"
+                  >delete</mat-icon
+                >
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center w-100">
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="addParameter()"
+          class="w-50"
+        >
+          Dodaj parametr
+        </button>
+      </div>
+      <hr class="mt-5 w-100" />
+      <div class="form-input2 mt-4 w-100">
+        <div class="form-button">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="addProductForm.invalid"
+          >
+            Dodaj produkt
+          </button>
+        </div>
+      </div>
     </div>
   </form>
+  <app-alert
+    *ngIf="error2"
+    [message]="error2"
+    [alertType]="'warning'"
+  ></app-alert>
+  <app-alert
+    *ngIf="success"
+    [message]="success"
+    [alertType]="'success'"
+  ></app-alert>
 </section>

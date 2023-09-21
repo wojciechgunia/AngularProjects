@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
+  AddProductData,
   GetProductResponse,
+  PostProductResponse,
   PrimitiveProduct,
   Product,
 } from '../models/product.model';
@@ -70,5 +72,15 @@ export class ProductsService {
           }
         }),
       );
+  }
+
+  addProduct(addProductData: AddProductData): Observable<PostProductResponse> {
+    return this.http.post<PostProductResponse>(
+      `${this.apiUrl}`,
+      addProductData,
+      {
+        withCredentials: true,
+      },
+    );
   }
 }

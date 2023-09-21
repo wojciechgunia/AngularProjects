@@ -1,13 +1,16 @@
+import { AddProductData } from './../../../../../core/models/product.model';
+import { AddProduct } from './../../../../../core/models/forms.model';
 import { Image } from 'src/app/modules/core/models/image.model';
 import { ImageService } from './../../../../../core/services/image.service';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { AddProduct } from 'src/app/modules/core/models/forms.model';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormService } from 'src/app/modules/core/services/form.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { CategoriesService } from 'src/app/modules/core/services/categories.service';
 import { BehaviorSubject } from 'rxjs';
 import { Category } from 'src/app/modules/core/models/categories.model';
+import { ProductsService } from 'src/app/modules/core/services/products.service';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-add-product-form',
@@ -19,7 +22,10 @@ export class AddProductFormComponent {
   fileName: string | null = null;
 
   imageUrls: Image[] = [];
+
+  success: string | null = null;
   error: string | null = null;
+  error2: string | null = null;
 
   addProductForm: FormGroup<AddProduct> = this.formService.initAddProductForm();
 
@@ -29,10 +35,20 @@ export class AddProductFormComponent {
     private imageService: ImageService,
     private formService: FormService,
     private categoriesService: CategoriesService,
+    private productService: ProductsService,
   ) {}
 
   get controls() {
     return this.addProductForm.controls;
+  }
+
+  get parameters(): FormArray<
+    FormGroup<{
+      key: FormControl<string>;
+      value: FormControl<string>;
+    }>
+  > {
+    return this.addProductForm.controls.parameters;
   }
 
   onFileSelected(event: any) {
@@ -68,34 +84,65 @@ export class AddProductFormComponent {
     return this.formService.getErrorMessage(typ, control);
   }
 
-  config: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '15rem',
-    minHeight: '5rem',
-    placeholder: 'Wpisz opis produktu tutaj...',
-    translate: 'no',
-    defaultParagraphSeparator: 'p',
-    defaultFontName: 'Arial',
-    toolbarHiddenButtons: [['insertImage', 'insertVideo']],
-    customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText',
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-  };
+  config: AngularEditorConfig = this.imageService.config;
 
   addProduct() {
-    //
+    const formValue = this.addProductForm.getRawValue();
+    const parametersObject: { [key: string]: string } = {};
+    formValue.parameters.forEach((item) => {
+      parametersObject[item.key] = item.value;
+    });
+    const parameters = `${JSON.stringify(parametersObject)}`;
+    console.log(parameters);
+    const imagesUid = this.imageUrls.map((url) => {
+      const [, uid] = url.url.split('uid=');
+      return uid;
+    });
+
+    const addProductData: AddProductData = {
+      ...formValue,
+      price: Number(formValue.price),
+      parameters,
+      imagesUid,
+    };
+    console.log(addProductData);
+    this.productService.addProduct(addProductData).subscribe({
+      next: () => {
+        this.addProductForm.reset();
+        this.imageUrls = [];
+        this.error2 = '';
+        this.success = 'Poprawnie dodano produkt';
+      },
+      error: (err) => {
+        this.success = '';
+        this.error2 = err;
+      },
+    });
+  }
+
+  deleteParameter(i: number) {
+    this.parameters.removeAt(i);
+  }
+
+  addParameter() {
+    const newGroup = new FormGroup({
+      key: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(100),
+        ],
+        nonNullable: true,
+      }),
+      value: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(100),
+        ],
+        nonNullable: true,
+      }),
+    });
+    this.parameters.push(newGroup);
   }
 }

@@ -19,7 +19,7 @@
   <div class="row">
     <div class="col-md-12 mt-3">
       <p class="product-dsc">Opis produktu</p>
-      <div [innerHTML]="product.descHtml"></div>
+      <div *ngIf="htmlContent" [innerHTML]="htmlContent"></div>
     </div>
   </div>
   <div class="row">

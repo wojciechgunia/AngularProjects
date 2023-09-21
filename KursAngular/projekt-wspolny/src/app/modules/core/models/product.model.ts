@@ -29,3 +29,19 @@ export interface Product
       shortId: string
     }
 }
+
+export interface AddProductData {
+  name: string;
+  mainDesc: string;
+  descHtml: string;
+  price: number;
+  imagesUid: string[];
+  parameters: string;
+  category: string;
+}
+
+export interface PostProductResponse
+{
+  timestamp: string;
+  message: string;
+}

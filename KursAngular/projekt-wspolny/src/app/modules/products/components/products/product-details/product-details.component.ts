@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Product } from 'src/app/modules/core/models/product.model';
@@ -13,10 +14,12 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
+    private sanitizer: DomSanitizer,
   ) {}
 
   product: Product | null = null;
   parameters: { [key: string]: string } | null = null;
+  htmlContent: null | SafeHtml = null;
 
   ngOnInit(): void {
     this.route.paramMap
@@ -29,6 +32,9 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe({
         next: (product) => {
           this.product = { ...product };
+          this.htmlContent = this.sanitizer.bypassSecurityTrustHtml(
+            product.descHtml,
+          );
           try {
             this.parameters = JSON.parse(product.parameters);
           } catch (e) {

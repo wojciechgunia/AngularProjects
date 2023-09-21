@@ -117,61 +117,33 @@ export class FormService {
   initAddProductForm(): FormGroup<AddProduct> {
     return new FormGroup({
       name: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
-        ],
+        validators: [Validators.required, Validators.maxLength(200)],
         nonNullable: true,
       }),
       mainDesc: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
-        ],
+        validators: [Validators.required, Validators.maxLength(200)],
         nonNullable: true,
       }),
       descHtml: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
-        ],
+        validators: [Validators.required],
         nonNullable: true,
       }),
       price: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
-        ],
+        validators: [Validators.required, Validators.maxLength(20)],
         nonNullable: true,
       }),
       category: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
-        ],
+        validators: [Validators.required, Validators.maxLength(100)],
         nonNullable: true,
       }),
       parameters: new FormArray([
         new FormGroup({
           key: new FormControl('', {
-            validators: [
-              Validators.required,
-              Validators.minLength(3),
-              Validators.maxLength(100),
-            ],
+            validators: [Validators.required, Validators.maxLength(100)],
             nonNullable: true,
           }),
           value: new FormControl('', {
-            validators: [
-              Validators.required,
-              Validators.minLength(3),
-              Validators.maxLength(100),
-            ],
+            validators: [Validators.required, Validators.maxLength(100)],
             nonNullable: true,
           }),
         }),
@@ -205,10 +177,8 @@ export class FormService {
     } else if (typ == 'productform') {
       if (control.hasError('required')) {
         return 'To pole jest wymagane';
-      } else if (control.hasError('minlength')) {
-        return 'To pole musi mieć co najmniej 3 znaki';
       } else {
-        return 'To pole może mieć co najwyżej 100 znaków';
+        return 'To pole zawiera za dużo znaków';
       }
     } else {
       if (control.hasError('required')) {
