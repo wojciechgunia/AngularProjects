@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "node_modules/angular-notifier/styles.scss";
+@import 'node_modules/angular-notifier/styles.scss';
 
 html,
 body {
@@ -7,5 +7,9 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.dialog {
+  min-width: 400px;
 }

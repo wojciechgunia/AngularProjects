@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AddProductFormComponent } from './components/administrator/edit-products/add-product-form/add-product-form.component';
 import { DeleteProductFormComponent } from './components/administrator/edit-products/delete-product-form/delete-product-form.component';
 import { UploadedImagesComponent } from './components/administrator/edit-products/add-product-form/uploaded-images/uploaded-images.component';
+import { DeleteDialogComponent } from './components/administrator/edit-products/delete-product-form/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { UploadedImagesComponent } from './components/administrator/edit-product
     AddProductFormComponent,
     DeleteProductFormComponent,
     UploadedImagesComponent,
+    DeleteDialogComponent,
   ],
   imports: [SharedModule, AdministrationRoutingModule, AngularEditorModule],
 })

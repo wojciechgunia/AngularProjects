@@ -8,6 +8,7 @@ import {
   PostProductResponse,
   PrimitiveProduct,
   Product,
+  ProductResponse,
 } from '../models/product.model';
 
 @Injectable({
@@ -82,5 +83,13 @@ export class ProductsService {
         withCredentials: true,
       },
     );
+  }
+
+  deleteProduct(uid: string): Observable<ProductResponse> {
+    const params = new HttpParams().append('uid', uid);
+    return this.http.delete<ProductResponse>(`${this.apiUrl}`, {
+      params,
+      withCredentials: true,
+    });
   }
 }

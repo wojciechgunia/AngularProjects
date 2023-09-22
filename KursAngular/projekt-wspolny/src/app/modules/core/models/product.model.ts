@@ -45,3 +45,9 @@ export interface PostProductResponse
   timestamp: string;
   message: string;
 }
+
+export interface ProductResponse
+{
+  timestamp: string;
+  message: string;
+}
