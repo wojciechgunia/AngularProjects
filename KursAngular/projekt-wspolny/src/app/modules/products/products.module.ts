@@ -9,7 +9,12 @@ import { ProductDetailsComponent } from './components/products/product-details/p
 import { CarouselComponent } from './components/products/product-details/carousel/carousel.component';
 
 @NgModule({
-  declarations: [ProductsComponent, ProductComponent, ProductDetailsComponent, CarouselComponent],
+  declarations: [
+    ProductsComponent,
+    ProductComponent,
+    ProductDetailsComponent,
+    CarouselComponent,
+  ],
   imports: [SharedModule, ProductsRoutingModule],
 })
 export class ProductsModule {}
