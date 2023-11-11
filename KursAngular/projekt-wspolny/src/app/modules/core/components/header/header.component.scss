@@ -5,3 +5,16 @@
 .dropdown-item {
   cursor: pointer;
 }
+
+.display-initial {
+  display: initial;
+
+  .icon-size {
+    line-height: 30px;
+  }
+}
+
+.dropdown-menu-end {
+  right: 0px;
+  top: 43px;
+}
