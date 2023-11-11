@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { switchMap } from 'rxjs';
+import { PostBasketBody } from 'src/app/modules/core/models/basket.model';
 import { Product } from 'src/app/modules/core/models/product.model';
+import { BasketService } from 'src/app/modules/core/services/basket.service';
 import { ProductsService } from 'src/app/modules/core/services/products.service';
 
 @Component({
@@ -16,6 +19,8 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private productsService: ProductsService,
     private sanitizer: DomSanitizer,
+    private basketService: BasketService,
+    private notifierService: NotifierService,
   ) {}
 
   quantityControl = new FormControl(1);
@@ -47,6 +52,23 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToBasket() {
-    console.log(this.quantityControl.value);
+    const body: PostBasketBody = {
+      product: this.product!.uid,
+      quantity: Number(this.quantityControl.value),
+    };
+    this.basketService.addProductToBasket(body).subscribe({
+      next: () => {
+        this.notifierService.notify(
+          'success',
+          'Poprawnie dodano produkt do koszyka',
+        );
+      },
+      error: () => {
+        this.notifierService.notify(
+          'warning',
+          'Dodanie produktu nie powiodło się',
+        );
+      },
+    });
   }
 }
