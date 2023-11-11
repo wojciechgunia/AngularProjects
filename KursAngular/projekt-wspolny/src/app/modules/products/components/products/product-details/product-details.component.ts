@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
@@ -17,6 +18,7 @@ export class ProductDetailsComponent implements OnInit {
     private sanitizer: DomSanitizer,
   ) {}
 
+  quantityControl = new FormControl(1);
   product: Product | null = null;
   parameters: { [key: string]: string } | null = null;
   htmlContent: null | SafeHtml = null;
@@ -42,5 +44,9 @@ export class ProductDetailsComponent implements OnInit {
           }
         },
       });
+  }
+
+  addToBasket() {
+    console.log(this.quantityControl.value);
   }
 }
