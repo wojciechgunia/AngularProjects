@@ -10,7 +10,7 @@ export interface BasketProduct {
 }
 
 export interface GetBasketResponse {
-  BasketProducts: BasketProduct[];
+  basketProducts: BasketProduct[];
   summaryPrice: number;
 }
 
@@ -21,6 +21,6 @@ export interface PostBasketBody {
 }
 
 export interface BasketResponse {
-  body: ServerResponse | GetBasketResponse;
+  body: ServerResponse | GetBasketResponse | null;
   totalCount: number;
 }
