@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import {
@@ -52,6 +52,22 @@ export class BasketService {
       .pipe(
         map(extractResponse),
         tap(({ body, totalCount }) => {
+          this.totalCount$.next(totalCount);
+        }),
+      );
+  }
+
+  deleteProductToBasket(uuid: string): Observable<BasketResponse> {
+    const params = new HttpParams().append('uuid', uuid);
+    return this.http
+      .delete<ServerResponse>(`${this.apiUrl}`, {
+        withCredentials: true,
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map(extractResponse),
+        tap(({ totalCount }) => {
           this.totalCount$.next(totalCount);
         }),
       );

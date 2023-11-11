@@ -14,7 +14,10 @@
     <span> x {{ basketProduct.quantity }}</span>
     <span> {{ basketProduct.summaryPrice | currency: 'zł' }}</span>
   </div>
-  <mat-icon class="basket-product-icon" matTooltip="Usuń produkt z koszyka"
+  <mat-icon
+    class="basket-product-icon"
+    matTooltip="Usuń produkt z koszyka"
+    (click)="deleteProductFromBasket()"
     >cancel</mat-icon
   >
 </div>
