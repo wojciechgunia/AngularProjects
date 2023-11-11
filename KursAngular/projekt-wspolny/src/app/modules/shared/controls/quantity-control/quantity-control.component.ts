@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -21,6 +21,7 @@ import { Subscription } from 'rxjs';
 export class QuantityControlComponent
   implements ControlValueAccessor, OnDestroy
 {
+  @Input() startQuantity = 1;
   constructor() {
     this.sub.add(
       this.quantityControl.valueChanges.subscribe((value) => {
@@ -29,7 +30,7 @@ export class QuantityControlComponent
     );
   }
 
-  quantityControl = new FormControl(1);
+  quantityControl = new FormControl(this.startQuantity);
   sub = new Subscription();
 
   onChange = (value: String | null) => {};
