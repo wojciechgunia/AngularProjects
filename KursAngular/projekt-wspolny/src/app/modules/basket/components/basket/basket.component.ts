@@ -4,6 +4,7 @@ import {
   BasketProduct,
   GetBasketResponse,
 } from 'src/app/modules/core/models/basket.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-basket',
@@ -15,7 +16,10 @@ export class BasketComponent implements OnInit {
   summaryPrice = 0;
   errorMessage: string | null = null;
 
-  constructor(private basketService: BasketService) {}
+  constructor(
+    private basketService: BasketService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.basketService.getBasketProducts().subscribe({
@@ -36,5 +40,11 @@ export class BasketComponent implements OnInit {
     this.basketProducts = this.basketProducts.filter(
       (product) => product.uuid !== uuid,
     );
+  }
+
+  navigateToCreateOrder() {
+    this.router.navigate(['/zamowienia/zamow'], {
+      state: { summaryPrice: this.summaryPrice },
+    });
   }
 }
