@@ -1,6 +1,7 @@
 import {
   AddProduct,
   CategoryForm,
+  CustomerForm,
   LoginForm,
   RecoveryForm,
   RegisterForm,
@@ -151,6 +152,31 @@ export class FormService {
     });
   }
 
+  initCustomerForm(): FormGroup<CustomerForm> {
+    return new FormGroup({
+      firstName: new FormControl('', {
+        validators: [Validators.required],
+        nonNullable: true,
+      }),
+      lastName: new FormControl('', {
+        validators: [Validators.required],
+        nonNullable: true,
+      }),
+      phone: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(12),
+          Validators.maxLength(12),
+        ],
+        nonNullable: true,
+      }),
+      email: new FormControl('', {
+        validators: [Validators.required, Validators.email],
+        nonNullable: true,
+      }),
+    });
+  }
+
   getErrorMessage(typ: string, control: FormControl): string {
     if (typ == 'login') {
       if (control.hasError('required')) {
@@ -179,6 +205,18 @@ export class FormService {
         return 'To pole jest wymagane';
       } else {
         return 'To pole zawiera za dużo znaków';
+      }
+    } else if (typ == 'customer') {
+      if (control.hasError('required')) {
+        return 'To pole jest wymagane';
+      } else {
+        return 'To pole zawiera za dużo znaków';
+      }
+    } else if (typ == 'customerphone') {
+      if (control.hasError('required')) {
+        return 'To pole jest wymagane';
+      } else {
+        return 'Błędny format telefonu';
       }
     } else {
       if (control.hasError('required')) {

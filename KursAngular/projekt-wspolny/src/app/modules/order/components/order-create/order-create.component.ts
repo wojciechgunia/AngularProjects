@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { CustomerFormComponent } from './customer-form/customer-form.component';
 
 @Component({
   selector: 'app-order-create',
@@ -8,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./order-create.component.scss'],
 })
 export class OrderCreateComponent {
+  @ViewChild(CustomerFormComponent) customerFormComp!: CustomerFormComponent;
+
   constructor(
     private location: Location,
     private router: Router,
@@ -21,5 +24,9 @@ export class OrderCreateComponent {
     if (!locationState.summaryPrice) {
       this.router.navigate(['/']);
     }
+  }
+
+  order() {
+    console.log(this.customerFormComp.customerForm.getRawValue());
   }
 }
