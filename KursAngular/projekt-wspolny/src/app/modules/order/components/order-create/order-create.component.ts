@@ -24,7 +24,7 @@ export class OrderCreateComponent {
     private orderService: OrderService,
   ) {}
 
-  ngOnInit(): void {
+  OnInit(): void {
     const locationState = this.location.getState() as {
       summaryPrice: undefined | number;
       navigationId: number;
