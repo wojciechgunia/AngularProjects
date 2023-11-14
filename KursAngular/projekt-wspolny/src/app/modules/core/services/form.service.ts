@@ -165,11 +165,7 @@ export class FormService {
         nonNullable: true,
       }),
       phone: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(12),
-          Validators.maxLength(12),
-        ],
+        validators: [Validators.required],
         nonNullable: true,
       }),
       email: new FormControl('', {

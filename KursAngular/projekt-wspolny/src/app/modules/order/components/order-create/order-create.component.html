@@ -12,6 +12,11 @@
       <app-delivery-form></app-delivery-form>
     </div>
   </div>
+  <app-alert
+    *ngIf="errorMsg"
+    [alertType]="'warning'"
+    [message]="errorMsg"
+  ></app-alert>
   <div class="d-flex justify-content-end">
     <button mat-raised-button color="primary" (click)="order()">
       Kupuję i płacę

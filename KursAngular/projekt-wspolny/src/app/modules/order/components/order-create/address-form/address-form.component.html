@@ -22,11 +22,7 @@
   <div class="form-input">
     <mat-form-field appearance="fill">
       <mat-label>Miasto</mat-label>
-      <input
-        matInput
-        placeholder="adam@example.com"
-        [formControl]="controls.city"
-      />
+      <input matInput [formControl]="controls.city" />
       <mat-error *ngIf="controls.city.invalid">{{
         getErrorMessage('address', controls.city)
       }}</mat-error>
@@ -35,11 +31,7 @@
   <div class="form-input">
     <mat-form-field appearance="fill">
       <mat-label>Kod pocztowy</mat-label>
-      <input
-        matInput
-        placeholder="adam@example.com"
-        [formControl]="controls.postCode"
-      />
+      <input matInput [formControl]="controls.postCode" placeholder="00-000" />
       <mat-error *ngIf="controls.postCode.invalid">{{
         getErrorMessage('addresscode', controls.postCode)
       }}</mat-error>

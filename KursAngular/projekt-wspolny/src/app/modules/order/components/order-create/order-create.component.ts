@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { AddressFormComponent } from './address-form/address-form.component';
 import { DeliveryFormComponent } from './delivery-form/delivery-form.component';
+import { OrderService } from 'src/app/modules/core/services/order.service';
 
 @Component({
   selector: 'app-order-create',
@@ -11,6 +12,8 @@ import { DeliveryFormComponent } from './delivery-form/delivery-form.component';
   styleUrls: ['./order-create.component.scss'],
 })
 export class OrderCreateComponent {
+  errorMsg: string | null = null;
+
   @ViewChild(CustomerFormComponent) customerFormComp!: CustomerFormComponent;
   @ViewChild(AddressFormComponent) addressFormComp!: AddressFormComponent;
   @ViewChild(DeliveryFormComponent) deliveryFormComp!: DeliveryFormComponent;
@@ -18,6 +21,7 @@ export class OrderCreateComponent {
   constructor(
     private location: Location,
     private router: Router,
+    private orderService: OrderService,
   ) {}
 
   ngOnInit(): void {
@@ -31,14 +35,25 @@ export class OrderCreateComponent {
   }
 
   order() {
+    // console.log(this.customerFormComp.customerForm);
+    // console.log(this.addressFormComp.addressForm);
+    // console.log(this.deliveryFormComp.deliverForm);
     if (
       this.customerFormComp.customerForm.valid &&
       this.addressFormComp.addressForm.valid &&
       this.deliveryFormComp.deliverForm.valid
     ) {
-      console.log(this.customerFormComp.customerForm.getRawValue());
-      console.log(this.addressFormComp.addressForm.getRawValue());
-      console.log(this.deliveryFormComp.deliverForm.getRawValue());
+      this.orderService
+        .addOrder({
+          address: this.addressFormComp.addressForm.getRawValue(),
+          deliver: this.deliveryFormComp.deliverForm.getRawValue(),
+          customerDetails: this.customerFormComp.customerForm.getRawValue(),
+        })
+        .subscribe({
+          error: (err) => {
+            this.errorMsg = err;
+          },
+        });
     }
   }
 }
