@@ -5,9 +5,11 @@ import { OrderComponent } from './components/order/order.component';
 import { SharedModule } from '../shared/shared.module';
 import { OrderCreateComponent } from './components/order-create/order-create.component';
 import { CustomerFormComponent } from './components/order-create/customer-form/customer-form.component';
+import { AddressFormComponent } from './components/order-create/address-form/address-form.component';
+import { DeliveryFormComponent } from './components/order-create/delivery-form/delivery-form.component';
 
 @NgModule({
-  declarations: [OrderComponent, OrderCreateComponent, CustomerFormComponent],
+  declarations: [OrderComponent, OrderCreateComponent, CustomerFormComponent, AddressFormComponent, DeliveryFormComponent],
   imports: [SharedModule, OrderRoutingModule],
 })
 export class OrderModule {}

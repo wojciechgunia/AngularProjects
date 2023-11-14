@@ -1,7 +1,9 @@
 import {
   AddProduct,
+  AddressForm,
   CategoryForm,
   CustomerForm,
+  DeliveryForm,
   LoginForm,
   RecoveryForm,
   RegisterForm,
@@ -177,6 +179,36 @@ export class FormService {
     });
   }
 
+  initAddressForm(): FormGroup<AddressForm> {
+    return new FormGroup({
+      city: new FormControl('', {
+        validators: [Validators.required],
+        nonNullable: true,
+      }),
+      street: new FormControl('', {
+        validators: [Validators.required],
+        nonNullable: true,
+      }),
+      number: new FormControl('', {
+        validators: [Validators.required],
+        nonNullable: true,
+      }),
+      postCode: new FormControl('', {
+        validators: [Validators.required, Validators.pattern(/^\d{2}-\d{3}$/)],
+        nonNullable: true,
+      }),
+    });
+  }
+
+  initDeliverForm(): FormGroup<DeliveryForm> {
+    return new FormGroup({
+      uuid: new FormControl('', {
+        validators: [Validators.required],
+        nonNullable: true,
+      }),
+    });
+  }
+
   getErrorMessage(typ: string, control: FormControl): string {
     if (typ == 'login') {
       if (control.hasError('required')) {
@@ -217,6 +249,18 @@ export class FormService {
         return 'To pole jest wymagane';
       } else {
         return 'Błędny format telefonu';
+      }
+    } else if (typ == 'address') {
+      if (control.hasError('required')) {
+        return 'To pole jest wymagane';
+      } else {
+        return 'To pole zawiera za dużo znaków';
+      }
+    } else if (typ == 'addresscode') {
+      if (control.hasError('required')) {
+        return 'To pole jest wymagane';
+      } else {
+        return 'Kod pocztowy musi mieć format 00-000';
       }
     } else {
       if (control.hasError('required')) {

@@ -2,6 +2,8 @@ import { Location } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
+import { AddressFormComponent } from './address-form/address-form.component';
+import { DeliveryFormComponent } from './delivery-form/delivery-form.component';
 
 @Component({
   selector: 'app-order-create',
@@ -10,6 +12,8 @@ import { CustomerFormComponent } from './customer-form/customer-form.component';
 })
 export class OrderCreateComponent {
   @ViewChild(CustomerFormComponent) customerFormComp!: CustomerFormComponent;
+  @ViewChild(AddressFormComponent) addressFormComp!: AddressFormComponent;
+  @ViewChild(DeliveryFormComponent) deliveryFormComp!: DeliveryFormComponent;
 
   constructor(
     private location: Location,
@@ -27,6 +31,14 @@ export class OrderCreateComponent {
   }
 
   order() {
-    console.log(this.customerFormComp.customerForm.getRawValue());
+    if (
+      this.customerFormComp.customerForm.valid &&
+      this.addressFormComp.addressForm.valid &&
+      this.deliveryFormComp.deliverForm.valid
+    ) {
+      console.log(this.customerFormComp.customerForm.getRawValue());
+      console.log(this.addressFormComp.addressForm.getRawValue());
+      console.log(this.deliveryFormComp.deliverForm.getRawValue());
+    }
   }
 }
