@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import {
   GetOrderResponse,
+  GetOrdersResponse,
   PostOrder,
   PostOrderResponse,
 } from '../models/order.model';
@@ -31,8 +32,13 @@ export class OrderService {
   getOrder(uuid: string): Observable<GetOrderResponse> {
     const params = new HttpParams().append('uuid', uuid);
     return this.http.get<GetOrderResponse>(`${this.apiUrl}`, {
-      withCredentials: true,
       params,
+    });
+  }
+
+  getOrders(): Observable<GetOrdersResponse[]> {
+    return this.http.get<GetOrdersResponse[]>(`${this.apiUrl}`, {
+      withCredentials: true,
     });
   }
 }

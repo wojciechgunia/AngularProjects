@@ -14,6 +14,8 @@ export interface GetOrderResponse {
   summaryPrice: number;
 }
 
+export type GetOrdersResponse = Omit<GetOrderResponse, 'items' | 'summaryPrice'>
+
 export interface PostOrder {
   customerDetails: Customer;
   address: Address;
