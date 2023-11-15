@@ -1,7 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { PostOrder, PostOrderResponse } from '../models/order.model';
+import {
+  GetOrderResponse,
+  PostOrder,
+  PostOrderResponse,
+} from '../models/order.model';
 import { Observable, tap } from 'rxjs';
 
 @Injectable({
@@ -22,5 +26,13 @@ export class OrderService {
           window.location.href = response.redirectUri;
         }),
       );
+  }
+
+  getOrder(uuid: string): Observable<GetOrderResponse> {
+    const params = new HttpParams().append('uuid', uuid);
+    return this.http.get<GetOrderResponse>(`${this.apiUrl}`, {
+      withCredentials: true,
+      params,
+    });
   }
 }
