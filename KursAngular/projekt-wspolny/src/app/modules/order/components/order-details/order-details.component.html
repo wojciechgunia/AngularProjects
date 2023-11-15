@@ -21,7 +21,7 @@
   <div class="row">
     <div class="col-10">
       <p><b>Produkty:</b></p>
-      <div *ngFor="let product; in: order.items">
+      <div *ngFor="let product of order.items">
         <app-order-product [basketProduct]="product"></app-order-product>
       </div>
     </div>
