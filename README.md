@@ -22,7 +22,7 @@
 ###
 
 <ul>
-	<li><a href="https://github.com/wojciechgunia/AngularProjects/tree/main/KursAngular">KursAngular - contains content from the Angular - Od zera do Fullstack developera course
+	<li><a href="https://github.com/wojciechgunia/AngularProjects/tree/main/KursAngular">KursAngular - contains content from the "Angular - Od zera do Fullstack developera" course
 </a><ul><li><a href="https://www.udemy.com/course/angular-i-java-spring-od-zera-do-fullstack-developera/" target="_blank">Link to the course page</a></li></ul></li>
 </ul>
 
