@@ -34,7 +34,7 @@
 
 <ul>
 	<li><a href="https://github.com/WebSafer/WebSafer">WebSafer - contains the content of a project whose goal was to create a website about cybersecurity </a></li>
-	<li><a href="https://github.com/wojciechgunia/PUT_Brandshop_PO">PUT Brandshop Project - online store with Java Spring and Angular</a></li>
+	<li><a href="https://github.com/wojciechgunia/PUT_Brandshop">PUT Brandshop Project - online store with Java Spring and Angular</a></li>
 	<li><a href="https://github.com/wojciechgunia/PUT_IO_Project_JSON_Tools_FE">PUT_IO_Project_JSON_Tools - Angular JSON Management Tool [Frontend](Team project)</a></li>
 	<li><a href="https://github.com/TheRemekk/SmartTemp">SmartTemp Project - Temperature monitoring and control (IoT) system</a></li>
 	<li><a href="https://github.com/wojciechgunia/wojciechgunia.pl">Design of my personal website in Java Spring and Angular</a></li>
